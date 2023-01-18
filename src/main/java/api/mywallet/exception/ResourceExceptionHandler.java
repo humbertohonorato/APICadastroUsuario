@@ -24,8 +24,8 @@ public class ResourceExceptionHandler {
     /*
      * Manipulando exceção violação da integridade de dados
      */
-    @ExceptionHandler(DataIntegratyViolationException.class)
-    public ResponseEntity<StandardError> objectNotFoundException(DataIntegratyViolationException e) {
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<StandardError> objectNotFoundException(BusinessException e) {
         StandardError error = new StandardError(System.currentTimeMillis(),
                 HttpStatus.BAD_REQUEST.value(), e.getMessage());
 

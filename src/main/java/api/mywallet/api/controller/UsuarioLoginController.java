@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-//@CrossOrigin("*")
 @RequestMapping(path = "/usuario")
 public class UsuarioLoginController {
 
@@ -27,7 +26,7 @@ public class UsuarioLoginController {
 
     @PostMapping(path = "/login")
     public ResponseEntity efetuarLogin(@RequestBody @Valid UsuarioLoginRequest request) {
-        var token = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getSenha());
+        var token = new UsernamePasswordAuthenticationToken(request.email(), request.senha());
         var authentication = manager.authenticate(token);
         var tokenJWT = tokenService.gerarToken((UserDetailsImpl) authentication.getPrincipal());
 

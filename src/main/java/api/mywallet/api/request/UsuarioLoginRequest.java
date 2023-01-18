@@ -1,14 +1,6 @@
 package api.mywallet.api.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public record UsuarioLoginRequest(String email, String senha) {
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class UsuarioLoginRequest {
-    private String email;
-    private String senha;
 }
 

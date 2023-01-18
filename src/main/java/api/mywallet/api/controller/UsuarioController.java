@@ -18,7 +18,6 @@ import java.util.stream.Stream;
 
 
 @RestController
-//@CrossOrigin("*")
 @RequestMapping(path = "/usuario")
 public class UsuarioController {
 
@@ -28,7 +27,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioMapper mapper;
 
-    @PostMapping(path ="/cadastrar")
+    @PostMapping(path = "/cadastrar")
     public ResponseEntity<UsuarioResponse> create(@Valid @RequestBody UsuarioRequest request) {
         Optional<UsuarioResponse> optUsuario = Stream.of(request)
                 .map(mapper::toUsuario)
@@ -53,9 +52,9 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponse> update(@PathVariable Long codigoUsuario, @Valid @RequestBody UsuarioUpdateRequest request) {
         return Stream.of(request)
                 .map(mapper::toUsuario)
-                .map(paciente -> service.update(codigoUsuario, paciente))
+                .map(usuario -> service.update(codigoUsuario, usuario))
                 .map(mapper::toUsuarioResponse)
-                .map(pacienteResponse -> ResponseEntity.status(HttpStatus.OK).body(pacienteResponse))
+                .map(usuarioResponse -> ResponseEntity.status(HttpStatus.OK).body(usuarioResponse))
                 .findFirst()
                 .get();
     }
@@ -66,10 +65,4 @@ public class UsuarioController {
         return ResponseEntity.noContent().build();
     }
 
-//    @PostMapping("/logar")
-//    public ResponseEntity<UsuarioLogin> autentication(@RequestBody Optional<UsuarioLogin> user) {
-//
-//        return service.logar(user).map(resp -> ResponseEntity.ok(resp))
-//                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
-//    }
 }
